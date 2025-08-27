@@ -1,0 +1,162 @@
+//
+//  CardView.swift
+//  my-tinder
+//
+//  Created by Pavel Playerz0redd on 10.08.25.
+//
+
+import SwiftUI
+
+struct CardView: View {
+    @State private var card: CardModel
+    @State private var offset: CGFloat = .zero
+    @State private var angle: CGFloat = .zero
+    @State private var opacity: Double = 0
+    @State private var currentImageIndex = 0
+    
+    init(card: CardModel) {
+        self.card = card
+    }
+    
+    var body: some View {
+        
+        ZStack(alignment: .bottomLeading) {
+            
+            ZStack(alignment: .top) {
+                
+                Image(card.user.pictures[currentImageIndex])
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: Constants.CardConstants.cardWidth,
+                           height: Constants.CardConstants.cardHeight)
+                    .clipped()
+                    .overlay {
+                        LinearGradient(
+                            colors: [
+                                .black.opacity(0),
+                                .black.opacity(0),
+                                .black.opacity(1)
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    }
+                
+                VoteView()
+                    .padding(20)
+                    .opacity(opacity)
+                
+                ImageIndexView(count: card.user.pictures.count, currentIndex: currentImageIndex)
+                    .padding(10)
+                
+            }
+            .animation(.spring(), value: currentImageIndex)
+            
+            VStack {
+                infoSection(user: card.user)
+                    .padding(.leading, 20)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                tagsView(tags: card.user.tags)
+                    .padding(20)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            
+            ChangeImageView(
+                imageCount: card.user.pictures.count,
+                currentIndex: $currentImageIndex
+            )
+            
+        }
+        .frame(
+            width: Constants.CardConstants.cardWidth,
+            height: Constants.CardConstants.cardHeight
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .gesture(
+            DragGesture()
+                .onChanged(onChange)
+                .onEnded(onEnd)
+        )
+        .animation(.snappy, value: offset)
+        .animation(.snappy, value: angle)
+        .offset(x: offset)
+        .rotationEffect(.degrees(angle))
+    }
+}
+
+private extension CardView {
+    
+    func infoSection(user: User) -> some View {
+        VStack(alignment: .leading) {
+            
+            HStack {
+                Text(user.name)
+                    .fontWeight(.bold)
+                    .font(.system(size: 26))
+                
+                Text("\(user.age)")
+                    .fontWeight(.regular)
+                    .font(.system(size: 23))
+            }
+            
+            Text("Lives in \(user.city)")
+                .font(.system(size: 16))
+            
+            Text("\(user.distance ?? 0) kilometer away")
+                .font(.system(size: 16))
+            
+            
+        }
+        .foregroundColor(.white)
+    }
+}
+
+private extension CardView {
+    private static var currentWidth: CGFloat = 0
+    
+    func tagsView(tags: [User.Tags]?) -> some View {
+        HStack {
+            if let tags = tags {
+                ForEach(tags, id: \.self) { tag in
+                    tagCapsule(tag: tag)
+                }
+            }
+        }
+    }
+    
+    private func tagCapsule(tag: User.Tags) -> some View {
+        Text(tag.value)
+            .padding(8)
+            .foregroundStyle(.white)
+            .background {
+                Capsule()
+                    .fill(.indigo)
+                    .stroke(Color.white, lineWidth: 1)
+            }
+    }
+}
+
+private extension CardView {
+    func onChange(value: DragGesture.Value) -> Void {
+        offset = value.translation.width
+        angle = value.translation.width / 50
+        opacity = abs(value.translation.width) / 250
+    }
+    
+    func onEnd(value: DragGesture.Value) -> Void {
+        if abs(value.translation.width) < 200 {
+            offset = 0
+            angle = 0
+            opacity = 0
+            
+        }
+        else {
+            offset = value.translation.width > 0 ? 500 : -500
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                CardsEvents.shared.subject.send(.deleteCard(card))
+            }
+        }
+    }
+}
+
