@@ -26,9 +26,9 @@ struct CardView: View {
                 
                 Image(card.user.pictures[currentImageIndex])
                     .resizable()
+                    .scaledToFill()
                     .frame(width: Constants.CardConstants.cardWidth,
                            height: Constants.CardConstants.cardHeight)
-                    .scaledToFill()
                     .clipped()
                     .overlay {
                         LinearGradient(
@@ -93,6 +93,13 @@ private extension CardView {
                 Text("\(user.age)")
                     .fontWeight(.regular)
                     .font(.system(size: 23))
+                
+                if user.status == .verified {
+                    Image(systemName: "checkmark.seal")
+                        .foregroundStyle(.blue)
+                        .font(.title)
+                        .bold()
+                }
             }
             
             Text("Lives in \(user.city)")
