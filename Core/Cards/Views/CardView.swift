@@ -26,9 +26,9 @@ struct CardView: View {
                 
                 Image(card.user.pictures[currentImageIndex])
                     .resizable()
-                    .scaledToFill()
                     .frame(width: Constants.CardConstants.cardWidth,
                            height: Constants.CardConstants.cardHeight)
+                    .scaledToFill()
                     .clipped()
                     .overlay {
                         LinearGradient(
@@ -41,7 +41,7 @@ struct CardView: View {
                             endPoint: .bottom
                         )
                     }
-                
+              
                 VoteView()
                     .padding(20)
                     .opacity(opacity)
@@ -52,26 +52,21 @@ struct CardView: View {
             }
             .animation(.spring(), value: currentImageIndex)
             
-            VStack {
-                infoSection(user: card.user)
-                    .padding(.leading, 20)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                tagsView(tags: card.user.tags)
-                    .padding(20)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
             
             ChangeImageView(
                 imageCount: card.user.pictures.count,
                 currentIndex: $currentImageIndex
             )
             
+
+            VStack(alignment: .leading) {
+                infoSection(user: card.user)
+                tagsView(tags: card.user.tags)
+            }
+            .padding(.bottom, 30)
+            
+        
         }
-        .frame(
-            width: Constants.CardConstants.cardWidth,
-            height: Constants.CardConstants.cardHeight
-        )
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         .gesture(
             DragGesture()
@@ -113,10 +108,9 @@ private extension CardView {
 }
 
 private extension CardView {
-    private static var currentWidth: CGFloat = 0
     
     func tagsView(tags: [User.Tags]?) -> some View {
-        HStack {
+        CustomHStack {
             if let tags = tags {
                 ForEach(tags, id: \.self) { tag in
                     tagCapsule(tag: tag)
@@ -127,11 +121,12 @@ private extension CardView {
     
     private func tagCapsule(tag: User.Tags) -> some View {
         Text(tag.value)
-            .padding(8)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 5)
             .foregroundStyle(.white)
             .background {
                 Capsule()
-                    .fill(.indigo)
+                    .fill(Colors.tagGray.opacity(0.9))
                     .stroke(Color.white, lineWidth: 1)
             }
     }

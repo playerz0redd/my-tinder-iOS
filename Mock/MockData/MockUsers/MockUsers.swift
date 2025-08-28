@@ -17,7 +17,7 @@ struct MockUsers {
             city: "New York",
             distance: 2,
             pictures: ["statham-1", "statham-2"],
-            tags: nil,
+            tags: [.anime, .cooking, .hiking, .gaming, .onlineShopping],
             status: .verified,
             sex: .man
         )
@@ -31,7 +31,7 @@ struct MockUsers {
             city: "Amsterdam",
             distance: 13,
             pictures: ["cruz-1", "cruz-2", "cruz-3"],
-            tags: [.anime, .cooking, .hiking],
+            tags: [.anime, .cooking, .hiking, .gaming, .onlineShopping],
             status: .verified,
             sex: .man
         )
@@ -50,7 +50,7 @@ struct MockUsers {
                 "parker-3",
                 "parker-4"
             ],
-            tags: [.onlineShopping],
+            tags: [.onlineShopping, .cooking],
             status: .verified,
             sex: .man
         )
@@ -64,7 +64,7 @@ struct MockUsers {
             city: "Barcelona",
             distance: 5,
             pictures: ["ana-1", "ana-2"],
-            tags: nil,
+            tags: [.onlineShopping, .cooking],
             status: .verified,
             sex: .woman
         )

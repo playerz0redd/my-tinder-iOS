@@ -20,7 +20,7 @@ struct TabView: View {
                         .font(.system(size: 30))
                         .frame(maxWidth: .infinity)
                         .foregroundStyle(
-                            selectedTab != icon.rawValue ? AnyShapeStyle(.black) :
+                            selectedTab != icon.rawValue ? AnyShapeStyle(Colors.tagGray) :
                                 AnyShapeStyle(Colors.tinderGradient)
                             )
                         .animation(.easeInOut, value: selectedTab)

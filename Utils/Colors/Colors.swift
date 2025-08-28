@@ -27,4 +27,6 @@ struct Colors {
             endPoint: .trailing
         )
     }
+    
+    static var tagGray: Color = .init(red: 80/255, green: 89/255, blue: 101/255)
 }
