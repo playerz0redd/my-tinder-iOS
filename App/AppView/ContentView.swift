@@ -23,6 +23,7 @@ struct ContentView: View {
             }
             TabView(selectedTab: $router.currentTab)
         }
+        .animation(.easeOut, value: self.router.currentTab)
     }
 }
 
