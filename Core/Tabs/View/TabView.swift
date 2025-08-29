@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct TabView: View {
-    @State private var selectedTab: Int = 0
+    @Binding private var selectedTab: AppTabs
+    
+    init(selectedTab: Binding<AppTabs>) {
+        self._selectedTab = selectedTab
+    }
     
     var body: some View {
         HStack {
-            ForEach(TabIcons.allCases, id: \.self) { icon in
+            ForEach(AppTabs.allCases, id: \.self) { tab in
                 Button {
-                    self.selectedTab = icon.rawValue
+                    self.selectedTab = tab
                 } label: {
-                    Image(systemName: icon.iconName)
+                    Image(systemName: tab.iconName)
                         .font(.system(size: 30))
                         .frame(maxWidth: .infinity)
                         .foregroundStyle(
-                            selectedTab != icon.rawValue ? AnyShapeStyle(Colors.tagGray) :
+                            selectedTab != tab ? AnyShapeStyle(Colors.tagGray) :
                                 AnyShapeStyle(Colors.tinderGradient)
                             )
                         .animation(.easeInOut, value: selectedTab)

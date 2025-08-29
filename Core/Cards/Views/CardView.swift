@@ -82,7 +82,7 @@ struct CardView: View {
 
 private extension CardView {
     
-    func infoSection(user: User) -> some View {
+    private func infoSection(user: User) -> some View {
         VStack(alignment: .leading) {
             
             HStack {
@@ -116,7 +116,7 @@ private extension CardView {
 
 private extension CardView {
     
-    func tagsView(tags: [User.Tags]?) -> some View {
+    private func tagsView(tags: [User.Tags]?) -> some View {
         CustomHStack {
             if let tags = tags {
                 ForEach(tags, id: \.self) { tag in
@@ -140,13 +140,13 @@ private extension CardView {
 }
 
 private extension CardView {
-    func onChange(value: DragGesture.Value) -> Void {
+    private func onChange(value: DragGesture.Value) -> Void {
         offset = value.translation.width
         angle = value.translation.width / 50
         opacity = abs(value.translation.width) / 250
     }
     
-    func onEnd(value: DragGesture.Value) -> Void {
+    private func onEnd(value: DragGesture.Value) -> Void {
         if abs(value.translation.width) < 200 {
             offset = 0
             angle = 0

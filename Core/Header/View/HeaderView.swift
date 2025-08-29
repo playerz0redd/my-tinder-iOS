@@ -10,7 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     var body: some View {
         HStack {
-            Image(systemName: TabIcons.tinder.iconName)
+            Image(systemName: AppTabs.cardsTab.iconName)
             Text("tinder")
                 .bold()
         }

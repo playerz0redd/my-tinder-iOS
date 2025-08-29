@@ -11,7 +11,7 @@ import SwiftUI
 struct my_tinderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(router: .init(currentTab: .cardsTab))
         }
     }
 }

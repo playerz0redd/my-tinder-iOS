@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum TabIcons: Int, CaseIterable {
-    case tinder
+enum AppTabs: Int, CaseIterable {
+    case cardsTab
     case star
     case search
     case chats
@@ -16,7 +16,7 @@ enum TabIcons: Int, CaseIterable {
     
     var iconName: String {
         switch self {
-        case .tinder:
+        case .cardsTab:
             "flame.fill"
         case .star:
             "star.fill"
