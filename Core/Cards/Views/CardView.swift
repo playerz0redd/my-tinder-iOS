@@ -13,7 +13,7 @@ struct CardView: View {
     @State private var angle: CGFloat = .zero
     @State private var opacity: Double = 0
     @State private var currentImageIndex = 0
-    
+    @State private var isFlipped: Bool = false
     init(card: CardModel) {
         self.card = card
     }
@@ -77,6 +77,7 @@ struct CardView: View {
         .animation(.snappy, value: angle)
         .offset(x: offset)
         .rotationEffect(.degrees(angle))
+        .sensoryFeedback(.impact, trigger: isFlipped)
     }
 }
 
@@ -155,6 +156,7 @@ private extension CardView {
         }
         else {
             offset = value.translation.width > 0 ? 500 : -500
+            isFlipped.toggle()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 CardsEvents.shared.subject.send(.deleteCard(card))
             }

@@ -27,7 +27,11 @@ class ChatViewModel: ObservableObject {
     
     init(chatService: IChatService) {
         self.chatService = chatService
-        self.chats = chatService.fetchChats()
+        self.chats = fetchChats()
+    }
+    
+    private func fetchChats() -> [ChatModel]? {
+        chatService.fetchChats()
     }
     
 }

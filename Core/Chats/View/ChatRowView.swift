@@ -26,13 +26,14 @@ struct ChatRowView: View {
                 Divider()
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
+            .padding(.top, 15)
         }
         .padding(.leading, 20)
     }
 }
 
 private extension ChatRowView {
-    private var avatarSize: CGFloat { 80 }
+    private static let avatarSize: CGFloat = 80
     private func avatarView() -> some View {
         ZStack {
             Image(chat.imagePath)
@@ -45,7 +46,7 @@ private extension ChatRowView {
                 .fill(chat.isOnline ? .green : .red)
                 .stroke(.white, style: .init(lineWidth: 3))
                 .frame(width: 20, height: 20)
-                .offset(x: avatarSize / 2)
+                .offset(x: ChatRowView.avatarSize / 2)
         }
     }
 }
