@@ -32,4 +32,12 @@ struct Constants {
         }
     }
     
+    struct TButtonConstans {
+        
+        static var buttonWidth: CGFloat {
+            Constants.ScreenConstants.screenWidth * 0.8
+        }
+        
+    }
+    
 }

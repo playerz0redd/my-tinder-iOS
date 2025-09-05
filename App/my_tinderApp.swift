@@ -6,12 +6,25 @@
 //
 
 import SwiftUI
+import Firebase
+
 
 @main
 struct my_tinderApp: App {
+    
+    // MARK: - Init
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
+
     var body: some Scene {
-        WindowGroup {
-            ContentView(router: .init(currentTab: .cardsTab))
+      WindowGroup {
+        NavigationView {
+            RulesView()
+            //ContentView(router: .init(currentTab: .cardsTab))
         }
+      }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct ChatsView: View {
     @StateObject var viewModel: ChatViewModel = .init(chatService: MockChatService())
     var body: some View {
-        ScrollView(showsIndicators: false) {
+        ScrollView(showsIndicators: true) {
             if let chats = viewModel.chats {
                 ForEach(chats, id: \.self) { chat in
                     ChatRowView(chat: chat)
