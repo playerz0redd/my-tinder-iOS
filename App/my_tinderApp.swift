@@ -22,7 +22,8 @@ struct my_tinderApp: App {
     var body: some Scene {
       WindowGroup {
         NavigationView {
-            RulesView()
+            UserInfoView(viewModel: .init(userModel: .init(username: "", email: "", sex: .man, age: 10)))
+            //RulesView()
             //ContentView(router: .init(currentTab: .cardsTab))
         }
       }

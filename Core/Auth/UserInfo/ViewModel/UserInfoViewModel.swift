@@ -9,9 +9,13 @@ import Foundation
 import Combine
 
 final class UserInfoViewModel: ObservableObject {
+    
+    // MARK: - Rx
     @Published var userModel: UserInfoModel
     @Published var progressBarWidth: CGFloat = 0
     @Published var currentPhase: ProgressPhase = .gettingName
+    
+    // MARK: - Cancellables
     private var cancellables: Set<AnyCancellable> = []
     
     init(userModel: UserInfoModel) {
@@ -23,6 +27,10 @@ final class UserInfoViewModel: ObservableObject {
             print(self.progressBarWidth)
         }
         .store(in: &cancellables)
+    }
+    
+    func getProgressWidth(of viewWidth: CGFloat) -> CGFloat {
+        viewWidth / CGFloat(ProgressPhase.allCases.count) * CGFloat(currentPhase.rawValue + 1)
     }
     
 }

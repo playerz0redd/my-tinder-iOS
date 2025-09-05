@@ -28,5 +28,9 @@ struct Colors {
         )
     }
     
-    static var tagGray: Color = .init(red: 80/255, green: 89/255, blue: 101/255)
+    static let tagGray: Color = .init(red: 80/255, green: 89/255, blue: 101/255)
+    
+    static let tinderWhite: Color = .init(red: 240/255, green: 242/255, blue: 244/255)
+    
+    static let tinderBlack: Color = .init(red: 46/255, green: 41/255, blue: 41/255)
 }

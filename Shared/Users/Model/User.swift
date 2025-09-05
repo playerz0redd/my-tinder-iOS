@@ -46,9 +46,18 @@ struct User {
         case notVerified
     }
     
-    enum Sex {
+    enum Sex: CaseIterable {
         case man
         case woman
+        
+        var value: String {
+            switch self {
+            case .man:
+                "man"
+            case .woman:
+                "woman"
+            }
+        }
     }
     
 }

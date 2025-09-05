@@ -8,8 +8,8 @@
 import Foundation
 
 struct UserInfoModel {
-    var username: String
-    var email: String
-    var sex: User.Sex
-    var age: Int
+    var username: String = ""
+    var email: String?
+    var sex: User.Sex?
+    var age: Int?
 }
