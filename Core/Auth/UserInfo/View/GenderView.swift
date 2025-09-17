@@ -14,7 +14,7 @@ struct GenderView: View {
             UserInfoView.textSection(title: title, description: description)
             
             VStack(spacing: 15) {
-                ForEach(User.Sex.allCases, id: \.value) { gender in
+                ForEach(User.Gender.allCases, id: \.value) { gender in
                     genderButton(gender: gender) {
                         
                     }
@@ -27,7 +27,7 @@ struct GenderView: View {
 }
 
 private extension GenderView {
-    func genderButton(gender: User.Sex, action: @escaping () -> Void) -> some View {
+    func genderButton(gender: User.Gender, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text("I am a \(gender.value)")
                 .frame(maxWidth: .infinity)

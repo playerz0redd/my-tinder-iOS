@@ -10,6 +10,6 @@ import Foundation
 struct UserInfoModel {
     var username: String = ""
     var email: String?
-    var sex: User.Sex?
+    var sex: User.Gender?
     var age: Int?
 }

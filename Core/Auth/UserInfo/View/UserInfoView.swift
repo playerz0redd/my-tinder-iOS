@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UserInfoView: View {
+    var sdf: String = ""
     @StateObject var viewModel: UserInfoViewModel
     var body: some View {
         VStack(spacing: 30) {

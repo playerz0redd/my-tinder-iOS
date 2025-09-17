@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NameView: View {
     @StateObject var viewModel: UserInfoViewModel
+    @FocusState var isActiveKeyboard: Bool
     var body: some View {
         VStack(spacing: 20) {
             VStack(alignment: .leading, spacing: 20) {
@@ -28,6 +29,10 @@ struct NameView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            isActiveKeyboard = false
+        }
     }
 }
 
@@ -42,6 +47,7 @@ private extension NameView {
             )
             .font(.system(size: 20))
             .bold()
+            .focused($isActiveKeyboard)
     }
 }
 

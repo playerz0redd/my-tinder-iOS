@@ -16,7 +16,7 @@ struct User {
     let pictures: [String]
     let tags: [Tags]?
     let status: Status
-    let sex: Sex
+    let gender: Gender
     
     enum Tags {
         case onlineShopping
@@ -46,7 +46,7 @@ struct User {
         case notVerified
     }
     
-    enum Sex: CaseIterable {
+    enum Gender: CaseIterable {
         case man
         case woman
         

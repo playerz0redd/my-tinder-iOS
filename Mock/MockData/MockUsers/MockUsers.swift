@@ -19,7 +19,7 @@ struct MockUsers {
             pictures: ["statham-1", "statham-2"],
             tags: [.anime, .cooking, .hiking, .gaming, .onlineShopping],
             status: .verified,
-            sex: .man
+            gender: .man
         )
     }
     
@@ -33,7 +33,7 @@ struct MockUsers {
             pictures: ["cruz-1", "cruz-2", "cruz-3"],
             tags: [.anime, .cooking, .hiking, .gaming, .onlineShopping],
             status: .verified,
-            sex: .man
+            gender: .man
         )
     }
     
@@ -52,7 +52,7 @@ struct MockUsers {
             ],
             tags: [.onlineShopping, .cooking],
             status: .verified,
-            sex: .man
+            gender: .man
         )
     }
     
@@ -66,7 +66,7 @@ struct MockUsers {
             pictures: ["ana-1", "ana-2"],
             tags: [.onlineShopping, .cooking],
             status: .verified,
-            sex: .woman
+            gender: .woman
         )
     }
 }
